@@ -154,6 +154,9 @@ namespace AspNetCoreRoutesExamples
             //});
 
             app.UseMvc(routes => {
+                routes.MapRoute(name:"areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}");
+
                 routes.MapRoute(name:"MyDefault",
                     template:"{controller=Home}/{action=Index}/{id?}");
 
