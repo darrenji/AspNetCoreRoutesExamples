@@ -41,90 +41,93 @@ namespace AspNetCoreRoutesExamples
             //});
 
             //另一种写法
-            app.UseMvc(routes => {
-                //routes.MapRoute(
-                //    name:"ShopSchema2",
-                //    template:"Shop/OldAction",
-                //    defaults: new { controller="Home", action="Index"});
+            //app.UseMvc(routes => {
+            //routes.MapRoute(
+            //    name:"ShopSchema2",
+            //    template:"Shop/OldAction",
+            //    defaults: new { controller="Home", action="Index"});
 
-                //routes.MapRoute(
-                //    name:"ShopSchema",
-                //    template: "Shop/{action}",
-                //    defaults:new {controller="Home"}
-                //    );
+            //routes.MapRoute(
+            //    name:"ShopSchema",
+            //    template: "Shop/{action}",
+            //    defaults:new {controller="Home"}
+            //    );
 
-                //routes.MapRoute("", "X{controller}/{action}");
+            //routes.MapRoute("", "X{controller}/{action}");
 
-                //routes.MapRoute(
-                //    name:"default",
-                //    template:"{controller=Home}/{action=Index}");
+            //routes.MapRoute(
+            //    name:"default",
+            //    template:"{controller=Home}/{action=Index}");
 
-                //routes.MapRoute(
-                //    name:"",
-                //    template:"Public/{controller=Home}/{action=Index}");
+            //routes.MapRoute(
+            //    name:"",
+            //    template:"Public/{controller=Home}/{action=Index}");
 
-                //都赋上默认值
-                //routes.MapRoute(name:"MyRoute", template:"{controller=Home}/{action=Index}/{id=DefaultId}");
+            //都赋上默认值
+            //routes.MapRoute(name:"MyRoute", template:"{controller=Home}/{action=Index}/{id=DefaultId}");
 
-                //路由参数可空的情况
-                //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}");
+            //路由参数可空的情况
+            //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}");
 
-                //获取尾部多个参数的做法
-                //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}/{*catchall}");
+            //获取尾部多个参数的做法
+            //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}/{*catchall}");
 
-                //对路由参数约束
-                //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id:int?}");
+            //对路由参数约束
+            //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id:int?}");
 
-                //对路由参数的另外一种约束方法，约束单独列
-                //routes.MapRoute(
-                //    name: "MyDefault",
-                //   template:"{controller}/{action}/{id?}",
-                //   defaults:new { controller="Home", action="Index"},
-                //   constraints:new { id= new IntRouteConstraint()});
+            //对路由参数的另外一种约束方法，约束单独列
+            //routes.MapRoute(
+            //    name: "MyDefault",
+            //   template:"{controller}/{action}/{id?}",
+            //   defaults:new { controller="Home", action="Index"},
+            //   constraints:new { id= new IntRouteConstraint()});
 
-                //正则表达式约束1
-                //routes.MapRoute(
-                //    name:"MyRoute",
-                //    template:"{controller:regex(^H.*)=Home}/{action=Index}/{id?}");
+            //正则表达式约束1
+            //routes.MapRoute(
+            //    name:"MyRoute",
+            //    template:"{controller:regex(^H.*)=Home}/{action=Index}/{id?}");
 
-                //正则表达式约束2
-                //routes.MapRoute(
-                //    name: "MyRoute",
-                //    template: "{controller:regex(^H.*)=Home}/"
-                //        + "{action:regex(^Index$|^About$)=Index}/{id?}");
+            //正则表达式约束2
+            //routes.MapRoute(
+            //    name: "MyRoute",
+            //    template: "{controller:regex(^H.*)=Home}/"
+            //        + "{action:regex(^Index$|^About$)=Index}/{id?}");
 
-                //值类型约束
-                //routes.MapRoute(
-                //    name:"MyRoute",
-                //    template:"{controller=Home}/{action=Index}/{id:range(10,20)}");
+            //值类型约束
+            //routes.MapRoute(
+            //    name:"MyRoute",
+            //    template:"{controller=Home}/{action=Index}/{id:range(10,20)}");
 
-                //混合约束
-                //routes.MapRoute(
-                //    name:"MyRoute",
-                //    template:"{controller=Home}/{action=Index}" + "/{id:alpha:minlength(6)?}");
+            //混合约束
+            //routes.MapRoute(
+            //    name:"MyRoute",
+            //    template:"{controller=Home}/{action=Index}" + "/{id:alpha:minlength(6)?}");
 
-                //使用系统类约束
-                //routes.MapRoute(
-                //    name: "MyRoute",
-                //    template: "{controller}/{action}/{id?}",
-                //    defaults: new { controller = "Home", actiion = "Index" },
-                //    constraints: new {
-                //        id = new CompositeRouteConstraint(new IRouteConstraint[] {
-                //            new AlphaRouteConstraint(),
-                //            new MinLengthRouteConstraint(6)
-                //        })
-                //    });
+            //使用系统类约束
+            //routes.MapRoute(
+            //    name: "MyRoute",
+            //    template: "{controller}/{action}/{id?}",
+            //    defaults: new { controller = "Home", actiion = "Index" },
+            //    constraints: new {
+            //        id = new CompositeRouteConstraint(new IRouteConstraint[] {
+            //            new AlphaRouteConstraint(),
+            //            new MinLengthRouteConstraint(6)
+            //        })
+            //    });
 
-                //使用自定义约束类
-                //routes.MapRoute(name:"MyRoute",
-                //    template:"{controller}/{action}/{id?}",
-                //    defaults:new { controller="Home", actioin="Index"},
-                //    constraints:new { id=new WeekDayConstraint()});
+            //使用自定义约束类
+            //routes.MapRoute(name:"MyRoute",
+            //    template:"{controller}/{action}/{id?}",
+            //    defaults:new { controller="Home", actioin="Index"},
+            //    constraints:new { id=new WeekDayConstraint()});
 
-                //自定义行内约束
-                //routes.MapRoute(name:"MyDefault",
-                //    template:"{controller=Home}/{action=Index}/{id:weekday}");
-            });
+            //自定义行内约束
+            //routes.MapRoute(name:"MyDefault",
+            //    template:"{controller=Home}/{action=Index}/{id:weekday}");
+            //);
+
+            //属性路由
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

@@ -9,12 +9,15 @@ using AspNetCoreRoutesExamples.Models;
 
 namespace AspNetCoreRoutesExamples.Controllers
 {
+    [Route("app/[controller]/actions/[action]/{id?}")]
     public class CustomerController : Controller
     {
         // GET: /<controller>/
+        //[Route("myroute")]
+        //[Route("[controller]/MyAction")]
         public IActionResult Index()
         {
-            return View(new Result {
+            return View("Result", new Result {
                 Controller=nameof(CustomerController),
                 Action=nameof(Index)
             });
