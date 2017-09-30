@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.AspNetCore.Routing;
+using AspNetCoreRoutesExamples.Infrastructure;
 
 namespace AspNetCoreRoutesExamples
 {
@@ -16,6 +19,9 @@ namespace AspNetCoreRoutesExamples
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //自定义行内约束
+            services.Configure<RouteOptions>(options => options.ConstraintMap.Add("weekday", typeof(WeekDayConstraint)));
+
             services.AddMvc();
         }
 
@@ -64,7 +70,60 @@ namespace AspNetCoreRoutesExamples
                 //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}");
 
                 //获取尾部多个参数的做法
-                routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}/{*catchall}");
+                //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id?}/{*catchall}");
+
+                //对路由参数约束
+                //routes.MapRoute(name: "MyRoute", template: "{controller=Home}/{action=Index}/{id:int?}");
+
+                //对路由参数的另外一种约束方法，约束单独列
+                //routes.MapRoute(
+                //    name: "MyDefault",
+                //   template:"{controller}/{action}/{id?}",
+                //   defaults:new { controller="Home", action="Index"},
+                //   constraints:new { id= new IntRouteConstraint()});
+
+                //正则表达式约束1
+                //routes.MapRoute(
+                //    name:"MyRoute",
+                //    template:"{controller:regex(^H.*)=Home}/{action=Index}/{id?}");
+
+                //正则表达式约束2
+                //routes.MapRoute(
+                //    name: "MyRoute",
+                //    template: "{controller:regex(^H.*)=Home}/"
+                //        + "{action:regex(^Index$|^About$)=Index}/{id?}");
+
+                //值类型约束
+                //routes.MapRoute(
+                //    name:"MyRoute",
+                //    template:"{controller=Home}/{action=Index}/{id:range(10,20)}");
+
+                //混合约束
+                //routes.MapRoute(
+                //    name:"MyRoute",
+                //    template:"{controller=Home}/{action=Index}" + "/{id:alpha:minlength(6)?}");
+
+                //使用系统类约束
+                //routes.MapRoute(
+                //    name: "MyRoute",
+                //    template: "{controller}/{action}/{id?}",
+                //    defaults: new { controller = "Home", actiion = "Index" },
+                //    constraints: new {
+                //        id = new CompositeRouteConstraint(new IRouteConstraint[] {
+                //            new AlphaRouteConstraint(),
+                //            new MinLengthRouteConstraint(6)
+                //        })
+                //    });
+
+                //使用自定义约束类
+                //routes.MapRoute(name:"MyRoute",
+                //    template:"{controller}/{action}/{id?}",
+                //    defaults:new { controller="Home", actioin="Index"},
+                //    constraints:new { id=new WeekDayConstraint()});
+
+                //自定义行内约束
+                //routes.MapRoute(name:"MyDefault",
+                //    template:"{controller=Home}/{action=Index}/{id:weekday}");
             });
         }
     }
