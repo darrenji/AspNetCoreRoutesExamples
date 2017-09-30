@@ -20,7 +20,11 @@ namespace AspNetCoreRoutesExamples
         public void ConfigureServices(IServiceCollection services)
         {
             //自定义行内约束
-            services.Configure<RouteOptions>(options => options.ConstraintMap.Add("weekday", typeof(WeekDayConstraint)));
+            services.Configure<RouteOptions>(options => {
+                options.ConstraintMap.Add("weekday", typeof(WeekDayConstraint));
+                options.LowercaseUrls = true;
+                options.AppendTrailingSlash = true;
+            });
 
             services.AddMvc();
         }
@@ -133,19 +137,27 @@ namespace AspNetCoreRoutesExamples
             //------------------------------
             // 高级路由
             //------------------------------
-            app.UseMvc(routes => {
-                //routes.MapRoute(
-                //    name:"NewRoute",
-                //    template:"App/Do{action}",
-                //    defaults:new { controller="Home"});
+            //app.UseMvc(routes => {
+            //    //routes.MapRoute(
+            //    //    name:"NewRoute",
+            //    //    template:"App/Do{action}",
+            //    //    defaults:new { controller="Home"});
 
-                routes.MapRoute(
-                    name:"default",
+            //    routes.MapRoute(
+            //        name:"default",
+            //        template:"{controller=Home}/{action=Index}/{id?}");
+
+
+            //    routes.MapRoute(
+            //        name:"out",
+            //        template:"outbound/{controller=Home}/{action=Index}");
+            //});
+
+            app.UseMvc(routes => {
+                routes.MapRoute(name:"MyDefault",
                     template:"{controller=Home}/{action=Index}/{id?}");
 
-
-                routes.MapRoute(
-                    name:"out",
+                routes.MapRoute(name:"out",
                     template:"outbound/{controller=Home}/{action=Index}");
             });
         }
